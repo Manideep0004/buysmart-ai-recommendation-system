@@ -1,3 +1,4 @@
+
 async function loadRec() {
 
     loadRow("rec1", 10)
@@ -30,6 +31,10 @@ async function loadRow(divId, index) {
             <img src="${p.image[0]}" />
             <h4>${p.title}</h4>
         `
+
+        card.onclick = () => {
+            loadRow("rec4", index)
+        }
 
         div.appendChild(card)
 
