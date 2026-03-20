@@ -18,7 +18,7 @@ async function loadRec() {
 
         card.innerHTML = `
             <img src="${p.image[0]}" />
-            <h3>${p.title}</h3>
+            <h4>${p.title}</h4>
         `
 
         div.appendChild(card)

@@ -7,11 +7,24 @@
 
 <body>
 
-<h1>BuySmart Recommendations</h1>
+<div class="navbar">
+    <h2>BuySmart</h2>
 
-<button onclick="loadRec()">Get Recommendations</button>
+    <input
+        type="text"
+        placeholder="Search product..."
+    />
 
-<div id="products"></div>
+    <button onclick="loadRec()">
+        Recommend
+    </button>
+</div>
+
+
+<h2>Recommended for you</h2>
+
+<div id="products" class="grid"></div>
+
 
 <script src="script.js"></script>
 
