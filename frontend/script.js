@@ -1,4 +1,3 @@
-
 async function loadRec() {
 
     loadRow("rec1", 10)
@@ -14,6 +13,12 @@ async function loadRow(divId, index) {
     )
 
     const data = await res.json()
+
+    render(divId, data)
+
+}
+
+function render(divId, data) {
 
     const div =
         document.getElementById(divId)
@@ -32,8 +37,16 @@ async function loadRow(divId, index) {
             <h4>${p.title}</h4>
         `
 
-        card.onclick = () => {
-            loadRow("rec4", index)
+        card.onclick = async () => {
+
+            const res = await fetch(
+                `http://127.0.0.1:8000/recommend_by_id/${p.product_id}`
+            )
+
+            const newData = await res.json()
+
+            render("rec4", newData)
+
         }
 
         div.appendChild(card)

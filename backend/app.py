@@ -44,3 +44,27 @@ def home():
 @app.get("/recommend/{product_index}")
 def get_rec(product_index: int):
     return recommend(product_index)
+
+@app.get("/recommend_by_id/{pid}")
+def recommend_by_id(pid: str):
+
+    # find index
+    for i, v in product_map.items():
+        if v == pid:
+            index = i
+            break
+
+    distances, indices = model.kneighbors(
+        matrix.T[index],
+        n_neighbors=6
+    )
+
+    recs = indices.flatten()[1:]
+
+    ids = [product_map[i] for i in recs]
+
+    return meta_df[
+        meta_df["product_id"].isin(ids)
+    ][["product_id", "title", "image"]].to_dict(
+        orient="records"
+    )
