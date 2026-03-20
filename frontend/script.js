@@ -4,6 +4,9 @@ async function loadRec() {
     loadRow("rec2", 20)
     loadRow("rec3", 30)
 
+    loadPopular()
+    loadUser()
+
 }
 
 async function loadRow(divId, index) {
@@ -52,5 +55,51 @@ function render(divId, data) {
         div.appendChild(card)
 
     })
+
+}
+
+async function loadUser() {
+
+    const res = await fetch(
+        "http://127.0.0.1:8000/recommend_user/A4V3MZPLN3XUU"
+    )
+
+    const data = await res.json()
+
+    render("rec6", data)
+
+}
+
+async function loadUserRec() {
+
+    const uid =
+        document.getElementById("userInput").value
+
+    if (!uid) return
+
+    const res = await fetch(
+        `http://127.0.0.1:8000/recommend_user/${uid}`
+    )
+
+    const data = await res.json()
+
+    render("rec6", data)
+
+}
+
+async function searchProduct() {
+
+    const q =
+        document.getElementById(
+            "searchInput"
+        ).value
+
+    const res = await fetch(
+        `http://127.0.0.1:8000/search/${q}`
+    )
+
+    const data = await res.json()
+
+    render("rec1", data)
 
 }

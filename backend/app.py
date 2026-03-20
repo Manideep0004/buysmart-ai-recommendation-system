@@ -96,3 +96,56 @@ def popular():
     ][["product_id", "title", "image"]].to_dict(
         orient="records"
     )
+
+@app.get("/recommend_user/{uid}")
+def recommend_user(uid: str):
+
+    # products rated by user
+    user_products = df[
+        df["user_id"] == uid
+    ]["product_id"].values
+
+    if len(user_products) == 0:
+        return []
+
+    # take first product
+    pid = user_products[0]
+
+    # find index
+    index = None
+    for i, v in product_map.items():
+        if v == pid:
+            index = i
+            break
+
+    if index is None:
+        return []
+
+    distances, indices = model.kneighbors(
+        matrix.T[index],
+        n_neighbors=6
+    )
+
+    recs = indices.flatten()[1:]
+
+    ids = [product_map[i] for i in recs]
+
+    return meta_df[
+        meta_df["product_id"].isin(ids)
+    ][["product_id", "title", "image"]].to_dict(
+        orient="records")
+
+@app.get("/search/{query}")
+def search(query: str):
+
+    results = meta_df[
+        meta_df["title"].str.contains(
+            query,
+            case=False,
+            na=False
+        )
+    ].head(5)
+
+    return results[
+        ["product_id", "title", "image"]
+    ].to_dict(orient="records")

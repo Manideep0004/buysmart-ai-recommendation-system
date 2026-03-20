@@ -9,8 +9,25 @@
 <body>
 
 <div class="navbar">
+
     <h2>BuySmart</h2>
-    <button onclick="loadRec()">Recommend</button>
+
+    <input id="searchInput"
+        placeholder="Search product"
+    />
+
+    <button onclick="searchProduct()">
+        Search
+    </button>
+
+    <input id="userInput"
+        placeholder="User id"
+    />
+
+    <button onclick="loadUserRec()">
+        User Rec
+    </button>
+
 </div>
 
 <h2>Recommended for you</h2>
@@ -24,6 +41,9 @@
 
 <h2>Similar products</h2>
 <div id="rec4" class="grid"></div>
+
+<h2>User Recommendations</h2>
+<div id="rec6" class="grid"></div>
 
 <script src="script.js"></script>
 
