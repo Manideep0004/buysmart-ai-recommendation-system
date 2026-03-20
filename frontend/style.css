@@ -1,0 +1,21 @@
+body {
+    font-family: Arial;
+    background: #111;
+    color: white;
+}
+
+#products {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 200px;
+    margin: 10px;
+    padding: 10px;
+    background: #222;
+}
+
+.card img {
+    width: 100%;
+}
