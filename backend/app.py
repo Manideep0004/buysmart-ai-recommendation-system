@@ -19,6 +19,18 @@ meta_df = pickle.load(open("meta.pkl", "rb"))
 product_map = pickle.load(open("product_map.pkl", "rb"))
 matrix = pickle.load(open("matrix.pkl", "rb"))
 
+import pandas as pd
+
+df = pd.read_csv(
+    "../data/ratings.csv",
+    header=None,
+    names=[
+        "product_id",
+        "user_id",
+        "rating",
+        "timestamp"
+    ]
+)
 
 def recommend(product_index, n=5):
     distances, indices = model.kneighbors(
@@ -65,6 +77,22 @@ def recommend_by_id(pid: str):
 
     return meta_df[
         meta_df["product_id"].isin(ids)
+    ][["product_id", "title", "image"]].to_dict(
+        orient="records"
+    )
+
+@app.get("/popular")
+def popular():
+
+    top = (
+        df["product_id"]
+        .value_counts()
+        .head(10)
+        .index
+    )
+
+    return meta_df[
+        meta_df["product_id"].isin(top)
     ][["product_id", "title", "image"]].to_dict(
         orient="records"
     )
