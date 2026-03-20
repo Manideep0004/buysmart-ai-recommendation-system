@@ -31,9 +31,9 @@ body {
 /* GRID */
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
     padding: 20px;
 }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>BuySmart</title>
     <link rel="stylesheet" href="style.css">
@@ -9,22 +10,17 @@
 
 <div class="navbar">
     <h2>BuySmart</h2>
-
-    <input
-        type="text"
-        placeholder="Search product..."
-    />
-
-    <button onclick="loadRec()">
-        Recommend
-    </button>
+    <button onclick="loadRec()">Recommend</button>
 </div>
 
-
 <h2>Recommended for you</h2>
+<div id="rec1" class="grid"></div>
 
-<div id="products" class="grid"></div>
+<h2>More like this</h2>
+<div id="rec2" class="grid"></div>
 
+<h2>Trending</h2>
+<div id="rec3" class="grid"></div>
 
 <script src="script.js"></script>
 
