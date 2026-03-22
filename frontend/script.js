@@ -12,7 +12,7 @@ async function loadRec() {
 async function loadRow(divId, index) {
 
     const res = await fetch(
-        `http://127.0.0.1:8000/recommend/${index}`
+        `https://buysmart-api-kqj5.onrender.com/recommend/${index}`
     )
 
     const data = await res.json()
@@ -43,7 +43,7 @@ function render(divId, data) {
         card.onclick = async () => {
 
             const res = await fetch(
-                `http://127.0.0.1:8000/recommend_by_id/${p.product_id}`
+                `https://buysmart-api-kqj5.onrender.com/recommend_by_id/${p.product_id}`
             )
 
             const newData = await res.json()
@@ -61,7 +61,7 @@ function render(divId, data) {
 async function loadUser() {
 
     const res = await fetch(
-        "http://127.0.0.1:8000/recommend_user/A4V3MZPLN3XUU"
+        "https://buysmart-api-kqj5.onrender.com/recommend_user/A4V3MZPLN3XUU"
     )
 
     const data = await res.json()
@@ -78,7 +78,7 @@ async function loadUserRec() {
     if (!uid) return
 
     const res = await fetch(
-        `http://127.0.0.1:8000/recommend_user/${uid}`
+        `https://buysmart-api-kqj5.onrender.com/recommend_user/${uid}`
     )
 
     const data = await res.json()
@@ -95,7 +95,7 @@ async function searchProduct() {
         ).value
 
     const res = await fetch(
-        `http://127.0.0.1:8000/search/${q}`
+        `https://buysmart-api-kqj5.onrender.com/search/${q}`
     )
 
     const data = await res.json()
