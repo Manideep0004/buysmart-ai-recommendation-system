@@ -2,9 +2,10 @@ import os
 import pickle
 import pandas as pd
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware  
+from fastapi.middleware.cors import CORSMiddleware
 
 BASE_DIR = os.path.dirname(__file__)
+
 app = FastAPI()
 
 app.add_middleware(
@@ -32,18 +33,6 @@ matrix = pickle.load(
     open(os.path.join(BASE_DIR, "matrix.pkl"), "rb")
 )
 
-import pandas as pd
-
-df = pd.read_csv(
-    os.path.join(BASE_DIR, "data", "ratings.csv"),
-    header=None,
-    names=[
-        "product_id",
-        "user_id",
-        "rating",
-        "timestamp"
-    ]
-)
 
 def recommend(product_index, n=5):
     distances, indices = model.kneighbors(
@@ -70,61 +59,10 @@ def home():
 def get_rec(product_index: int):
     return recommend(product_index)
 
+
 @app.get("/recommend_by_id/{pid}")
 def recommend_by_id(pid: str):
 
-    # find index
-    for i, v in product_map.items():
-        if v == pid:
-            index = i
-            break
-
-    distances, indices = model.kneighbors(
-        matrix.T[index],
-        n_neighbors=6
-    )
-
-    recs = indices.flatten()[1:]
-
-    ids = [product_map[i] for i in recs]
-
-    return meta_df[
-        meta_df["product_id"].isin(ids)
-    ][["product_id", "title", "image"]].to_dict(
-        orient="records"
-    )
-
-@app.get("/popular")
-def popular():
-
-    top = (
-        df["product_id"]
-        .value_counts()
-        .head(10)
-        .index
-    )
-
-    return meta_df[
-        meta_df["product_id"].isin(top)
-    ][["product_id", "title", "image"]].to_dict(
-        orient="records"
-    )
-
-@app.get("/recommend_user/{uid}")
-def recommend_user(uid: str):
-
-    # products rated by user
-    user_products = df[
-        df["user_id"] == uid
-    ]["product_id"].values
-
-    if len(user_products) == 0:
-        return []
-
-    # take first product
-    pid = user_products[0]
-
-    # find index
     index = None
     for i, v in product_map.items():
         if v == pid:
@@ -146,7 +84,9 @@ def recommend_user(uid: str):
     return meta_df[
         meta_df["product_id"].isin(ids)
     ][["product_id", "title", "image"]].to_dict(
-        orient="records")
+        orient="records"
+    )
+
 
 @app.get("/search/{query}")
 def search(query: str):
