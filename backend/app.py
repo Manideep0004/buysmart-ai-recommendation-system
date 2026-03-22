@@ -1,8 +1,10 @@
+import os
 import pickle
 import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware  
 
+BASE_DIR = os.path.dirname(__file__)
 app = FastAPI()
 
 app.add_middleware(
@@ -14,15 +16,26 @@ app.add_middleware(
 )
 
 # load files
-model = pickle.load(open("model.pkl", "rb"))
-meta_df = pickle.load(open("meta.pkl", "rb"))
-product_map = pickle.load(open("product_map.pkl", "rb"))
-matrix = pickle.load(open("matrix.pkl", "rb"))
+model = pickle.load(
+    open(os.path.join(BASE_DIR, "model.pkl"), "rb")
+)
+
+meta_df = pickle.load(
+    open(os.path.join(BASE_DIR, "meta.pkl"), "rb")
+)
+
+product_map = pickle.load(
+    open(os.path.join(BASE_DIR, "product_map.pkl"), "rb")
+)
+
+matrix = pickle.load(
+    open(os.path.join(BASE_DIR, "matrix.pkl"), "rb")
+)
 
 import pandas as pd
 
 df = pd.read_csv(
-    "../data/ratings.csv",
+    os.path.join(BASE_DIR, "data", "ratings.csv"),
     header=None,
     names=[
         "product_id",
