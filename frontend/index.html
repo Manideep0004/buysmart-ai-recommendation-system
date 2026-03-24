@@ -1,49 +1,75 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>BuySmart</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuySmart AI UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="navbar">
+<header class="navbar">
+    <div class="navbar-brand">
+        <i class="fa-solid fa-robot"></i>
+        <h2>BuySmart</h2>
+    </div>
 
-    <h2>BuySmart</h2>
+    <div class="navbar-actions">
+        <div class="search-group">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input id="searchInput" placeholder="Search for products..." />
+            <button onclick="searchProduct()" class="btn-primary">Search</button>
+        </div>
+        
+        <div class="search-group user-group">
+            <i class="fa-solid fa-user search-icon"></i>
+            <input id="userInput" placeholder="Enter User ID..." />
+            <button onclick="loadUserRec()" class="btn-secondary">User Rec</button>
+        </div>
+    </div>
+</header>
 
-    <input id="searchInput"
-        placeholder="Search product"
-    />
+<main class="container">
+    <section class="rec-section">
+        <div class="section-header">
+            <h3><i class="fa-solid fa-star"></i> Recommended for you</h3>
+        </div>
+        <div id="rec1" class="grid"></div>
+    </section>
 
-    <button onclick="searchProduct()">
-        Search
-    </button>
+    <section class="rec-section">
+        <div class="section-header">
+            <h3><i class="fa-solid fa-layer-group"></i> More like this</h3>
+        </div>
+        <div id="rec2" class="grid"></div>
+    </section>
 
-    <input id="userInput"
-        placeholder="User id"
-    />
+    <section class="rec-section">
+        <div class="section-header">
+            <h3><i class="fa-solid fa-fire-flame-curved"></i> Trending</h3>
+        </div>
+        <div id="rec3" class="grid"></div>
+    </section>
 
-    <button onclick="loadUserRec()">
-        User Rec
-    </button>
+    <section class="rec-section">
+        <div class="section-header">
+            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Similar products</h3>
+        </div>
+        <div id="rec4" class="grid"></div>
+    </section>
 
-</div>
-
-<h2>Recommended for you</h2>
-<div id="rec1" class="grid"></div>
-
-<h2>More like this</h2>
-<div id="rec2" class="grid"></div>
-
-<h2>Trending</h2>
-<div id="rec3" class="grid"></div>
-
-<h2>Similar products</h2>
-<div id="rec4" class="grid"></div>
-
-<h2>User Recommendations</h2>
-<div id="rec6" class="grid"></div>
+    <section class="rec-section">
+        <div class="section-header">
+            <h3><i class="fa-solid fa-users"></i> User Recommendations</h3>
+        </div>
+        <div id="rec6" class="grid"></div>
+    </section>
+</main>
 
 <script src="script.js"></script>
 

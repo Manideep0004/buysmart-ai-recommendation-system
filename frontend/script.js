@@ -36,8 +36,12 @@ function render(divId, data) {
         card.className = "card"
 
         card.innerHTML = `
-            <img src="${p.image[0]}" />
-            <h4>${p.title}</h4>
+            <div class="card-img-wrapper">
+                <img src="${p.image[0]}" alt="${p.title}" loading="lazy" />
+            </div>
+            <div class="card-content">
+                <h4 title="${p.title}">${p.title}</h4>
+            </div>
         `
 
         card.onclick = async () => {
