@@ -3,75 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BuySmart AI UI</title>
+    <title>BuySmart AI | Intelligent Product Recommendations</title>
+    <meta name="description" content="Elevate your shopping experience with BuySmart AI. Discover products tailored just for you using our advanced recommendation engine.">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-<header class="navbar">
-    <div class="navbar-brand">
-        <i class="fa-solid fa-robot"></i>
-        <h2>BuySmart</h2>
+    <!-- Background Decor -->
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <div class="navbar-actions">
-        <div class="search-group">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input id="searchInput" placeholder="Search for products..." />
-            <button onclick="searchProduct()" class="btn-primary">Search</button>
-        </div>
-        
-        <div class="search-group user-group">
-            <i class="fa-solid fa-user search-icon"></i>
-            <input id="userInput" placeholder="Enter User ID..." />
-            <button onclick="loadUserRec()" class="btn-secondary">User Rec</button>
-        </div>
-    </div>
-</header>
+    <header class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <h2>BuySmart<span>AI</span></h2>
+            </div>
 
-<main class="container">
-    <section class="rec-section">
-        <div class="section-header">
-            <h3><i class="fa-solid fa-star"></i> Recommended for you</h3>
+            <div class="navbar-actions">
+                <div class="search-group" id="productSearchGroup">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input id="searchInput" placeholder="Search products..." />
+                    <button onclick="searchProduct()" class="btn-primary">Search</button>
+                </div>
+                
+                <div class="search-group user-group" id="userRecGroup">
+                    <i class="fa-solid fa-user-astronaut search-icon"></i>
+                    <input id="userInput" placeholder="User ID..." />
+                    <button onclick="loadUserRec()" class="btn-secondary">Get Recs</button>
+                </div>
+            </div>
         </div>
-        <div id="rec1" class="grid"></div>
-    </section>
+    </header>
 
-    <section class="rec-section">
-        <div class="section-header">
-            <h3><i class="fa-solid fa-layer-group"></i> More like this</h3>
-        </div>
-        <div id="rec2" class="grid"></div>
-    </section>
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <span class="badge">Next Gen Shopping</span>
+                <h1>Smart Recommendations <br>Powered by <span class="text-gradient">AI</span></h1>
+                <p>Experience the future of e-commerce with our advanced neural recommendation engine. Discover products you'll love, instantly.</p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">10M+</span>
+                        <span class="stat-label">Products</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">99%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="rec-section">
-        <div class="section-header">
-            <h3><i class="fa-solid fa-fire-flame-curved"></i> Trending</h3>
-        </div>
-        <div id="rec3" class="grid"></div>
-    </section>
+        <section class="rec-section" id="recommendedSection">
+            <div class="section-header">
+                <div class="header-icon"><i class="fa-solid fa-star"></i></div>
+                <h3>Recommended for you</h3>
+            </div>
+            <div id="rec1" class="grid"></div>
+        </section>
 
-    <section class="rec-section">
-        <div class="section-header">
-            <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Similar products</h3>
-        </div>
-        <div id="rec4" class="grid"></div>
-    </section>
+        <section class="rec-section" id="moreLikeThisSection">
+            <div class="section-header">
+                <div class="header-icon"><i class="fa-solid fa-layer-group"></i></div>
+                <h3>More like this</h3>
+            </div>
+            <div id="rec2" class="grid"></div>
+        </section>
 
-    <section class="rec-section">
-        <div class="section-header">
-            <h3><i class="fa-solid fa-users"></i> User Recommendations</h3>
-        </div>
-        <div id="rec6" class="grid"></div>
-    </section>
-</main>
+        <section class="rec-section" id="trendingSection">
+            <div class="section-header">
+                <div class="header-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
+                <h3>Trending Now</h3>
+            </div>
+            <div id="rec3" class="grid"></div>
+        </section>
 
-<script src="script.js"></script>
+        <section class="rec-section" id="similarProductsSection">
+            <div class="section-header">
+                <div class="header-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <h3>Similar products</h3>
+            </div>
+            <div id="rec4" class="grid"></div>
+        </section>
 
+        <section class="rec-section" id="userRecommendationsSection">
+            <div class="section-header">
+                <div class="header-icon"><i class="fa-solid fa-users"></i></div>
+                <h3>User-Specific Recommendations</h3>
+            </div>
+            <div id="rec6" class="grid"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 BuySmart AI. Built with ❤️ for intelligent shopping.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
