@@ -1,4 +1,6 @@
 // Theme and Animation Logic
+const API_BASE = "http://localhost:8000";
+
 document.addEventListener("DOMContentLoaded", () => {
     // Initial Load
     loadRec();
@@ -35,7 +37,7 @@ async function loadRow(divId, index) {
     div.innerHTML = "<div class='loader-placeholder'></div>";
     
     try {
-        const res = await fetch(`https://buysmart-api-kqj5.onrender.com/recommend/${index}`);
+        const res = await fetch(`${API_BASE}/products/${index}`);
         const data = await res.json();
         render(divId, data);
     } catch (err) {
@@ -68,7 +70,7 @@ function render(divId, data) {
             card.style.transform = "scale(0.95)";
             setTimeout(() => card.style.transform = "", 100);
 
-            const res = await fetch(`https://buysmart-api-kqj5.onrender.com/recommend_by_id/${p.product_id}`);
+            const res = await fetch(`${API_BASE}/products/by-id/${p.product_id}`);
             const newData = await res.json();
             render("rec4", newData);
             
@@ -82,7 +84,7 @@ function render(divId, data) {
 
 async function loadUser() {
     try {
-        const res = await fetch("https://buysmart-api-kqj5.onrender.com/recommend_user/A4V3MZPLN3XUU");
+        const res = await fetch(`${API_BASE}/products/search/popular`);
         const data = await res.json();
         render("rec6", data);
     } catch (err) {
@@ -98,7 +100,7 @@ async function loadUserRec() {
     btn.innerHTML = "<i class='fa-solid fa-circle-notch fa-spin'></i>";
     
     try {
-        const res = await fetch(`https://buysmart-api-kqj5.onrender.com/recommend_user/${uid}`);
+        const res = await fetch(`${API_BASE}/products/search/${uid}`);
         const data = await res.json();
         render("rec6", data);
     } catch (err) {
@@ -116,7 +118,7 @@ async function searchProduct() {
     btn.innerHTML = "<i class='fa-solid fa-circle-notch fa-spin'></i>";
 
     try {
-        const res = await fetch(`https://buysmart-api-kqj5.onrender.com/search/${q}`);
+        const res = await fetch(`${API_BASE}/products/search/${q}`);
         const data = await res.json();
         render("rec1", data);
         
