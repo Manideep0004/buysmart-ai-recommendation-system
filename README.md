@@ -52,34 +52,250 @@
 
 ---
 
-## 🚀 Getting Started Locally
+## 🚀 Getting Started - Complete Setup Guide
 
 ### Prerequisites
-- Any modern web browser.
-- Python 3.8+ (If you plan to run the backend locally).
 
-### Running the Frontend
-The frontend relies completely on native browser technologies and requires no bundlers!
+Before starting the project, ensure your system has the following installed:
 
-1. Clone the repository.
-2. Navigate to the `frontend/` directory.
-3. Serve the directory locally (e.g., via Python):
-   ```bash
-   python -m http.server 8080
-   ```
-4. Open your browser and go to `http://localhost:8080`.
+- **Python 3.8+** - [Download Python](https://www.python.org/downloads/)
+- **pip** - Usually comes with Python (verify with `pip --version`)
+- **Git** (optional) - [Download Git](https://git-scm.com/)
+- **Any modern web browser** - Chrome, Firefox, Edge, Safari
 
-*(Alternatively, you can just open `index.html` directly in your browser or through the VS Code Live Server extension).*
-
-### Running the Backend
-
-If you wish to run the backend model locally instead of querying the Render deployment:
-1. `cd backend/`
-2. `pip install -r requirements.txt`
-3. Start the server (e.g., `python app.py`)
-4. Point your `frontend/script.js` fetch functions to your localized API loopback!
+Verify your installations:
+```bash
+python --version
+pip --version
+```
 
 ---
+
+### Step 1: Clone/Download the Project
+
+If using Git:
+```bash
+git clone <your-repo-url>
+cd buysmart-ai-recommendation-system
+```
+
+Or download the ZIP file and extract it.
+
+---
+
+### Step 2: Setup Backend
+
+#### Navigate to Backend Directory
+```bash
+cd backend
+```
+
+#### Create Virtual Environment (Recommended)
+This isolates Python dependencies for this project.
+
+**Windows (PowerShell/CMD):**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+**Mac/Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+#### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+The `requirements.txt` contains:
+- `fastapi` - Web framework
+- `uvicorn` - ASGI server
+- `pandas` - Data processing
+- `scikit-learn` - ML library
+- `python-jose` - JWT tokens
+- `passlib` - Password hashing
+- And other required packages
+
+#### Verify Model Files Exist
+The backend requires pre-trained model files. Ensure these exist in the `backend/` directory:
+- `model.pkl` - The recommendation ML model
+- `matrix.pkl` - Similarity matrix
+- `meta.pkl` - Product metadata
+- `product_map.pkl` - Product ID mappings
+
+#### Start the Backend Server
+```bash
+# From inside the backend directory
+python run.py
+```
+
+Or manually with uvicorn:
+```bash
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+✅ **Success**: You should see:
+```
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Application startup complete.
+```
+
+Access the API documentation at: **`http://localhost:8000/docs`**
+
+---
+
+### Step 3: Setup Frontend
+
+#### Navigate to Frontend Directory
+```bash
+cd frontend
+```
+
+#### Start Frontend Server
+```bash
+# From inside the frontend directory
+python -m http.server 3000
+```
+
+Or use any other local server:
+
+**Node.js (if installed):**
+```bash
+npx http-server -p 3000
+```
+
+**Python (alternative port):**
+```bash
+python -m http.server 8080
+```
+
+✅ **Success**: You should see:
+```
+Serving HTTP on :: port 3000 (http://[::]:3000/) ...
+```
+
+---
+
+### Step 4: Access the Application
+
+Open your browser and navigate to:
+
+**Frontend**: `http://localhost:3000`
+**Backend API Docs**: `http://localhost:8000/docs`
+
+🎉 **The application is now running!**
+
+---
+
+## 📋 Project Startup Summary
+
+Here's a quick checklist for starting on a new system:
+
+1. ✅ Install Python 3.8+
+2. ✅ Clone/Download project
+3. ✅ Navigate to `backend/` folder
+4. ✅ Create virtual environment: `python -m venv venv`
+5. ✅ Activate virtual environment
+6. ✅ Install dependencies: `pip install -r requirements.txt`
+7. ✅ Start backend: `python run.py` (runs on port 8000)
+8. ✅ In new terminal, navigate to `frontend/` folder
+9. ✅ Start frontend: `python -m http.server 3000` (runs on port 3000)
+10. ✅ Open browser to `http://localhost:3000`
+
+---
+
+## 🔧 Troubleshooting
+
+### Issue: "ModuleNotFoundError: No module named 'fastapi'"
+**Solution**: Make sure you've activated the virtual environment and installed requirements:
+```bash
+pip install -r requirements.txt
+```
+
+### Issue: "Port 8000 already in use"
+**Solution**: Use a different port:
+```bash
+python -m uvicorn app.main:app --port 8001
+```
+
+### Issue: "No module named 'app'"
+**Solution**: Ensure you're running the command from the `backend/` directory.
+
+### Issue: CORS errors in frontend
+**Solution**: Backend CORS middleware is configured to accept all origins. If errors persist:
+1. Check backend is running on `http://localhost:8000`
+2. Check frontend `script.js` has correct `API_BASE` URL
+3. Verify `.env` file exists in project root
+
+### Issue: "Can't connect to backend from frontend"
+**Solution**: 
+- Backend must be running on `http://localhost:8000`
+- Frontend `script.js` should show: `const API_BASE = "http://localhost:8000"`
+- Check both are running in separate terminal windows
+
+### Issue: "Permission denied" when activating virtual environment (Mac/Linux)
+**Solution**: Make script executable:
+```bash
+chmod +x venv/bin/activate
+source venv/bin/activate
+```
+
+---
+
+## 🌍 Environment Variables
+
+Create a `.env` file in the **project root** if it doesn't exist:
+
+```env
+JWT_SECRET_KEY=your_secret_key_here_change_in_production
+SUPABSE_PASS=your_password_here
+```
+
+**Format**: Use `KEY=VALUE` (not `KEY : VALUE`)
+
+---
+
+## 📱 API Endpoints
+
+Once the backend is running, these endpoints are available:
+
+```
+POST   /auth/signup           - Register new user
+POST   /auth/login            - Login user
+GET    /products/{index}      - Get recommendations by index
+GET    /products/by-id/{pid}  - Get recommendations by product ID
+GET    /products/search/{query} - Search products
+```
+
+Full documentation: `http://localhost:8000/docs`
+
+---
+
+## 🎯 Quick Start Commands (Copy-Paste)
+
+**Terminal 1 (Backend):**
+```bash
+cd backend
+python -m venv venv
+# Activate venv (Windows: venv\Scripts\activate | Mac/Linux: source venv/bin/activate)
+pip install -r requirements.txt
+python run.py
+```
+
+**Terminal 2 (Frontend):**
+```bash
+cd frontend
+python -m http.server 3000
+```
+
+Then open: `http://localhost:3000`
+
+---
+
+
 
 <div align="center">
   <i>Developed with ❤️ for the modern web.</i>
