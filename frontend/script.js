@@ -45,7 +45,7 @@ async function loadRow(divId, index) {
         div.innerHTML = "<p class='error'>Failed to load recommendations.</p>";
     }
 }
-
+        
 function render(divId, data) {
     const div = document.getElementById(divId);
     div.innerHTML = "";
