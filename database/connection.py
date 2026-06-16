@@ -1,5 +1,6 @@
 import os
-from motor.motor_asyncio import AsyncIOMotorClient
+from typing import Optional
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -8,8 +9,8 @@ MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
 DB_NAME = os.getenv("MONGO_DB_NAME", "buysmart")
 
 class Database:
-    client: AsyncIOMotorClient = None
-    db = None
+    client: Optional[AsyncIOMotorClient] = None
+    db: Optional[AsyncIOMotorDatabase] = None
 
 
 db_instance = Database()

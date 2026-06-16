@@ -1,32 +1,45 @@
-from motor.motor_asyncio import AsyncIOMotorCollection
+from typing import Optional
+from motor.motor_asyncio import AsyncIOMotorCollection, AsyncIOMotorDatabase
 from .connection import get_db
 
 
 def get_users_collection() -> AsyncIOMotorCollection:
     """Return the 'users' collection."""
-    return get_db()["users"]
+    db: Optional[AsyncIOMotorDatabase] = get_db()
+    assert db is not None, "Database not connected"
+    return db["users"]
 
 
 def get_products_collection() -> AsyncIOMotorCollection:
     """Return the 'products' collection."""
-    return get_db()["products"]
+    db: Optional[AsyncIOMotorDatabase] = get_db()
+    assert db is not None, "Database not connected"
+    return db["products"]
 
 
 def get_orders_collection() -> AsyncIOMotorCollection:
     """Return the 'orders' collection."""
-    return get_db()["orders"]
+    db: Optional[AsyncIOMotorDatabase] = get_db()
+    assert db is not None, "Database not connected"
+    return db["orders"]
 
 
 def get_wishlist_collection() -> AsyncIOMotorCollection:
     """Return the 'wishlist' collection."""
-    return get_db()["wishlist"]
+    db: Optional[AsyncIOMotorDatabase] = get_db()
+    assert db is not None, "Database not connected"
+    return db["wishlist"]
 
 
 def get_cart_collection() -> AsyncIOMotorCollection:
     """Return the 'cart' collection."""
-    return get_db()["cart"]
+    db: Optional[AsyncIOMotorDatabase] = get_db()
+    assert db is not None, "Database not connected"
+    return db["cart"]
 
 
 def get_interactions_collection() -> AsyncIOMotorCollection:
     """Return the 'interactions' collection."""
-    return get_db()["interactions"]
+    db: Optional[AsyncIOMotorDatabase] = get_db()
+    assert db is not None, "Database not connected"
+    return db["interactions"]
