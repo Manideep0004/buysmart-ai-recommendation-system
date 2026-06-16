@@ -7,7 +7,7 @@ router = APIRouter()
 
 @router.get("/recommend/{product_index}")
 def get_rec(product_index: int):
-    """Old endpoint for index-based recommendations."""
+    """Index-based recommendations."""
     return rec_service.get_similar_products(str(product_index)) # Note: adjusted to use string ID internally
 
 @router.get("/by-id/{pid}")
@@ -28,6 +28,16 @@ async def get_personalized(current_user: dict = Depends(get_current_user)):
 async def interact(pid: str, type: str = "view", current_user: dict = Depends(get_current_user)):
     """Manually record a user interaction (view, click, etc.)."""
     await rec_service.record_interaction(current_user["id"], pid, type)
+
+@router.get("/{product_index}")
+def get_rec_by_index(product_index: int):
+    """Index-based recommendations."""
+    return rec_service.get_similar_products(str(product_index)) # Note: adjusted to use string ID internally
+
+@router.get("/search/popular")
+def popular():
+    """Return popular products."""
+    return rec_service.get_popular_products()
 
 @router.get("/search/{query}")
 def search(query: str):

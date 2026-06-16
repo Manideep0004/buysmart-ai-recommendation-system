@@ -77,5 +77,9 @@ class RecommendationService:
         results = self.meta_df[self.meta_df["title"].str.contains(query, case=False, na=False)].head(limit)
         return results[["product_id", "title", "image"]].to_dict(orient="records")
 
+    def get_popular_products(self, n: int = 10):
+        """Return a simple popular product list."""
+        return self.meta_df.head(n)[["product_id", "title", "image"]].to_dict(orient="records")
+
 # Singleton instance
 rec_service = RecommendationService()
