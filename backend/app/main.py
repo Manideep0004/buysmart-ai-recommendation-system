@@ -1,13 +1,13 @@
+import sys
+import os
+# Allow importing the top-level database/ package from inside backend/app/
+sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
+
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routes.auth import auth_router
 from .routes.products import router as product_router
-
-import sys
-import os
-# Allow importing the top-level database/ package from inside backend/app/
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 from database.connection import connect_db, disconnect_db
 
 

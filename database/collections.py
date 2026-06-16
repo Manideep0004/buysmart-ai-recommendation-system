@@ -25,3 +25,8 @@ def get_wishlist_collection() -> AsyncIOMotorCollection:
 def get_cart_collection() -> AsyncIOMotorCollection:
     """Return the 'cart' collection."""
     return get_db()["cart"]
+
+
+def get_interactions_collection() -> AsyncIOMotorCollection:
+    """Return the 'interactions' collection."""
+    return get_db()["interactions"]
