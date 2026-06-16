@@ -46,38 +46,38 @@
                     <button onclick="openAuthModal()" class="btn-primary" id="authBtn">Login</button>
                 </div>
             </div>
-
-            <!-- Auth Modal -->
-            <div id="authModal" class="modal hidden">
-                <div class="modal-content">
-                    <button onclick="closeAuthModal()" class="modal-close">&times;</button>
-                    
-                    <div class="auth-tabs">
-                        <button class="tab-btn active" onclick="switchTab('login')">Login</button>
-                        <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
-                    </div>
-
-                    <!-- Login Tab -->
-                    <div id="loginTab" class="auth-tab active">
-                        <h3>Welcome Back</h3>
-                        <input type="email" id="loginEmail" placeholder="Email" />
-                        <input type="password" id="loginPassword" placeholder="Password" />
-                        <button onclick="handleLogin()" class="btn-primary full-width">Login</button>
-                        <p id="loginError" class="error-msg"></p>
-                    </div>
-
-                    <!-- Signup Tab -->
-                    <div id="signupTab" class="auth-tab hidden">
-                        <h3>Create Account</h3>
-                        <input type="email" id="signupEmail" placeholder="Email" />
-                        <input type="password" id="signupPassword" placeholder="Password (6+ chars)" />
-                        <button onclick="handleSignup()" class="btn-primary full-width">Sign Up</button>
-                        <p id="signupError" class="error-msg"></p>
-                    </div>
-                </div>
-            </div>
         </div>
     </header>
+
+    <!-- Auth Modal (Outside navbar for proper positioning) -->
+    <div id="authModal" class="modal hidden">
+        <div class="modal-content">
+            <button onclick="closeAuthModal()" class="modal-close">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Tab -->
+            <div id="loginTab" class="auth-tab active">
+                <h3>Welcome Back</h3>
+                <input type="email" id="loginEmail" placeholder="Email" />
+                <input type="password" id="loginPassword" placeholder="Password" />
+                <button onclick="handleLogin()" class="btn-primary full-width">Login</button>
+                <p id="loginError" class="error-msg"></p>
+            </div>
+
+            <!-- Signup Tab -->
+            <div id="signupTab" class="auth-tab hidden">
+                <h3>Create Account</h3>
+                <input type="email" id="signupEmail" placeholder="Email" />
+                <input type="password" id="signupPassword" placeholder="Password (6+ chars)" />
+                <button onclick="handleSignup()" class="btn-primary full-width">Sign Up</button>
+                <p id="signupError" class="error-msg"></p>
+            </div>
+        </div>
+    </div>
 
     <main class="container">
         <!-- Hero Section -->
